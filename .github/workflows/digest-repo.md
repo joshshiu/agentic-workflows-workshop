@@ -34,17 +34,18 @@ ChatOps slash command. A user posts a comment that starts with `/digest-repo <ow
 3. Using the GitHub tools, list:
    - All **open issues** in that repo (exclude pull requests).
    - All **open pull requests** in that repo.
-4. Cap each list at the most recent 50 items if there are more, and note the cap in the output.
+4. **Cap each list at the 20 most recently updated items** (this is a hard limit — never include more, even if there are more open). If items were truncated, add a note like `_Showing 20 most recently updated of N total open issues._` above the section.
 5. Group both lists by primary label. Items without labels go into an "Unlabeled" group.
 6. For each item include:
-   - Title, linked to its URL
-   - Author as `@username`
+   - Title, linked to its URL (this is the **only** link per item — do not add comment counts as links, do not add author profile links, do not link labels)
+   - Author as plain `@username` text (no link)
    - How long it has been open (e.g. "3 days", "2 weeks")
 7. Produce a Markdown reply with:
-   - `## 📊 Repo Digest — <owner>/<repo>` heading
-   - **Totals line:** `**<N> open issues** · **<M> open pull requests**` (plus a stars/forks line if easily available from the repo metadata; otherwise omit).
+   - `## 📊 Repo Digest — <owner>/<repo>` heading (the `<owner>/<repo>` here is plain text, not a link)
+   - **Totals line:** `**<N> open issues** · **<M> open pull requests**` — use the true totals from the API even if the lists are capped. Do not include any other links on this line.
    - `### Issues` section with one subsection per label group.
    - `### Pull Requests` section with one subsection per label group.
    - If there are no open items at all, write "🎉 This repo has no open issues or pull requests."
+8. **Important link budget:** the entire reply must contain **fewer than 45 links** total. If you would exceed that, reduce the per-list cap further until you are under the budget.
 8. Use the `add-comment` safe output to post the reply on the triggering issue. Do not post multiple comments.
 9. If you cannot access the target repository (404, private), reply with a short error message and stop.
