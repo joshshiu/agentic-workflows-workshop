@@ -46,4 +46,5 @@ A ChatOps slash command. Activate **only** when the comment body starts with `/h
    - An "Overall" verdict line (e.g. **Overall: Mostly Positive**)
    - A `### Top Positive Comments` section with three blockquoted excerpts
    - A `### Top Negative Comments` section with three blockquoted excerpts
+   - A `### 🔤 Top terms` section: extract the 15 most-mentioned **content words** across all comments (lowercase, exclude stopwords like "the/and/that/this/with/have/from/just/also/will/would/about/people/one/like" and HN-specific filler), and render them as an inline list using sizes — words with higher counts get more emphasis. Example format: `**kubernetes** (12) · ***npm*** (9) · supply-chain (7) · _security_ (5) · …`. Use bold for the top 3, italic-bold for the next 3, italic for the next 4, plain for the rest.
 10. Use the `add-comment` safe output to post the reply. Do not post multiple comments.
